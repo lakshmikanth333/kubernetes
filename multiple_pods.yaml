@@ -10,5 +10,5 @@ spec:
     image: nginx
 
   - name: almalinux
-    image: almalinux:7
+    image: almalinux:8
     command: ["sleep", "2000"]
