@@ -2,7 +2,8 @@ apiVersion: v1
 kind: Pod
 
 metadata:
- name: nginx
+ name: expense
+ namespace: name-space-01
 
 spec:
  containers:
