@@ -10,20 +10,20 @@ metadata:
 spec:
   containers:
     - name: web-server
-      image: nginx:9
+      image: nginx
       env:
       - name: "hd-containers"
         value: "2000"
       - name: "images"
         value: "20"
 # 1000m is equal to 1 processor or 1 process
-        resources: 
-         requests:
-          memory: "64Mi"
-          cpu: "250m"
-         limits:
-          memory: "500Mi"
-          cpu: "500m"
+      resources: 
+       requests:
+        memory: "64Mi"
+        cpu: "250m"
+       limits:
+         memory: "500Mi"
+         cpu: "500m"
 
 
 
