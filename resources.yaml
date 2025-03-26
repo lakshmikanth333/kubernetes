@@ -13,9 +13,9 @@ spec:
       image: nginx
       env:
       - name: "hd-containers"
-        value: "2000"
+        value: "two"
       - name: "images"
-        value: "20"
+        value: "five"
 # 1000m is equal to 1 processor or 1 process
       resources: 
        requests:
