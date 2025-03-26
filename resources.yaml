@@ -12,10 +12,10 @@ spec:
     - name: web-server
       image: nginx
       env:
-      - name: "hd-containers"
-        value: "two"
+      - name: "hdcontainers"
+        value: "2000"
       - name: "images"
-        value: "five"
+        value: "20"
 # 1000m is equal to 1 processor or 1 process
       resources: 
        requests:
