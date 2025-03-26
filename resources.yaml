@@ -4,7 +4,7 @@ kind: Pod
 metadata:
  name: web
  labels:
-  ci-cd: "continues integ tool"
+  ci-cd: "continuesintegool"
   k8s: "orchestration"
 
 spec:
