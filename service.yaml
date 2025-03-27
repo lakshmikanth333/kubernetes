@@ -1,0 +1,33 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: web-pod
+  labels:
+    name: web
+    connection: https
+    secure: almost
+    evidence: ofcourse
+spec:
+  containers:
+    name: web-server
+    image: nginx
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: loadbalancer
+spec:
+  selectors:
+    name: web
+    connection: https
+    secure: almost
+    evidence: ofcourse
+
+  ports:
+  - protocol: tcp
+    port: 80
+    targetport: 80  
+
+
+  
