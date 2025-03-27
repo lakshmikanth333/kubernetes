@@ -9,7 +9,7 @@ metadata:
     evidence: ofcourse
 spec:
   containers:
-    name: web-server
+  - name: web-server
     image: nginx
 ---
 
