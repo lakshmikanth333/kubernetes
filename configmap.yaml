@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configdata
+data:
+  name: "Lakshmikanth"
+  age: "27"
+  proffession: "IT"
+  colony: "jjr"
+ 
