@@ -25,7 +25,7 @@ spec:
     evidence: ofcourse
 
   ports:
-  - protocol: tcp
+  - protocol: TCP
     port: 80
     targetPort: 80  
 
