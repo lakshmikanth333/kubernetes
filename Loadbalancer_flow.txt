@@ -1,0 +1,16 @@
+Flow Explanation
+LoadBalancer → Node:
+
+The external load balancer (provided by the cloud provider) forwards the request to a Node on the specific NodePort exposed by the service.
+
+Node → ClusterIP:
+
+The Node forwards the request internally to the ClusterIP, which is the virtual IP of the service.
+
+ClusterIP → Pod:
+
+The ClusterIP acts as an internal load balancer and routes the request to one of the Pods that match the service's selector.
+
+Pod → Container:
+
+Inside the selected Pod, the request is forwarded to the Container running your application (e.g., Nginx, Facebook app).
