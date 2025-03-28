@@ -1,7 +1,7 @@
 kind: Pod
 apiVersion: v1
 metadata:
-  name: web-lb
+  name: web-loadbalancer
   labels:
     name: web
     connection: https
@@ -17,7 +17,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: lb
+  name: loadbalancer
 spec:
   type: LoadBalancer
   selector:
