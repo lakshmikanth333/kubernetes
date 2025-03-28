@@ -1,0 +1,34 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: web-lb
+  labels:
+    name: web
+    connection: https
+    secure: almost
+    evidence: ofcourse
+    service: node-lb
+spec:
+  containers:
+  - name: web-server
+    image: nginx
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: lb
+spec:
+  type: LoadBalancer
+  selector:
+    name: web
+    connection: https
+    secure: almost
+    evidence: ofcourse
+    service: node-lb
+
+  ports:
+  - protocol: TCP  
+    port: 80
+    targetPort: 80  
+  
