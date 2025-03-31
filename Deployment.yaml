@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: lakshmikanth333/nginx:4.0
+        image: lakshmikanth333/nginx:5.0
         ports:
         - containerPort: 80
 
