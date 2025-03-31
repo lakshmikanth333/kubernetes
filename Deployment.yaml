@@ -32,7 +32,7 @@ spec:
 apiVersion: v1
 kind: LoadBalancer
 metadata:
-  name: loadbalancer
+  name: web-lb
 spec:
   type: LoadBalancer
   selector:
