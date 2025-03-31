@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: scale-servers
+  labels:
+    purpose: autoscale
+    env: prod
+spec:
+  replicas: 3
+  selector:
+# Replicaset uses below labels to find matching pod to create desired no.of pods  
+    matchLabels:
+      purpose: autoscale
+      env: prod
+# Below is pod template meaning the details of how the pod should be created      
+  template:
+    metadata:
+      labels:
+        purpose: autoscale
+        env: prod
+      spec:
+        containers:
+        - name: nginx
+          image: nginx  
+
+      
