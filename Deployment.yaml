@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: lakshmikanth333/nginx:2.0
+        image: lakshmikanth333/nginx:3.0
         ports:
         - containerPort: 80
 
