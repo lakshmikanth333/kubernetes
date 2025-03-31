@@ -21,6 +21,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx  
+        image: lakshmikanth333/nginx:2.0
 
       
