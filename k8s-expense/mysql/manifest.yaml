@@ -24,6 +24,23 @@ spec:
       containers:
       - name: mysql
         image: joindevops/mysql:1.0.0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-clusterip
+  namespace: expense
+spec:
+  selector:
+    app: mysql
+    type: db
+    project: expense
+  ports:
+  - protocol: TCP
+    port: 3306
+# Service will use targetport number to forward the traffic to pods 
+    targetPort: 3306 
+
 
         
 
