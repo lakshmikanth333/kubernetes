@@ -39,7 +39,7 @@ spec:
     targetPort: 80  
     nodePort: 30124
 
-#  Pod ↔ Persistent Volume
+# 1  Pod ↔ Persistent Volume
 #The Pod requests storage using a PVC named ebs-static.
 
 #This PVC is linked to the PV (ebs-static), which points to an AWS EBS volume (vol-0c3502bb7a108574e).
@@ -51,3 +51,13 @@ spec:
 
 #Result: Anything written to /usr/share/nginx/html in the pod goes directly to the 30Gi EBS volume (PVC only asks 20Gi, but it’s using the full PV).
 
+# 2. Service ↔ Pod (Networking)
+# The Service named loadbalancer:
+
+# Type: LoadBalancer → creates a public AWS ELB.
+
+# This matches your pod labels.
+
+# Traffic hitting the external ELB (port 80):
+
+# Gets forwarded to the pod’s container (port 80) running nginx.
