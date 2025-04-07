@@ -6,6 +6,7 @@ metadata:
     name: web
     service: pv
 spec:
+# here the only given region us-east-1d only gets the pv volume since we given it
   nodeSelector:
     topology.kubernetes.io/zone: us-east-1d
   containers:
@@ -13,6 +14,7 @@ spec:
     image: joindevops/frontend:1.2.0 
     volumeMounts:
     - name: persistent-storage
+# this is the mount directory for our 20Gi persistent volume
       mountPath: /usr/share/nginx/html
   volumes:
   - name: persistent-storage
@@ -36,3 +38,16 @@ spec:
     port: 80
     targetPort: 80  
     nodePort: 30124
+
+#  Pod ↔ Persistent Volume
+#The Pod requests storage using a PVC named ebs-static.
+
+#This PVC is linked to the PV (ebs-static), which points to an AWS EBS volume (vol-0c3502bb7a108574e).
+
+#So, the EBS volume is attached to the EC2 node (us-east-1d) where the pod is running.
+
+#Inside the pod, it's mounted at:
+#mountPath: /usr/share/nginx/html
+
+#Result: Anything written to /usr/share/nginx/html in the pod goes directly to the 30Gi EBS volume (PVC only asks 20Gi, but it’s using the full PV).
+
