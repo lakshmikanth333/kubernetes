@@ -2,49 +2,44 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: ebs-dynamic
-spec: 
-  storageClassName: "ebs-sc"
+spec:
+  storageClassName: "ebs-sc" # Empty string must be explicitly set otherwise default StorageClass will be set
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   resources:
-    requests: 
+    requests:
       storage: 19Gi
 ---
-
 apiVersion: v1
 kind: Pod
 metadata:
   name: ebs-dynamic
   labels:
-    purpose: "ebs-dynamic-prov"
+    purpose: "ebs-dynamic-demo"
 spec:
-# Here the given region us-east-1d node only gets the pv volume since we given it
   nodeSelector:
-    topology.kubernetes.io/zone: us-east-1b
+    topology.kubernetes.io/zone: us-east-1a
   containers:
   - name: nginx
     image: nginx
     volumeMounts:
     - name: persistent-storage
-# this is the mount directory for our 20Gi persistent volume
       mountPath: /usr/share/nginx/html
   volumes:
   - name: persistent-storage
     persistentVolumeClaim:
       claimName: ebs-dynamic
-
---- 
-
+---
 kind: Service
 apiVersion: v1
 metadata:
   name: nginx-dynamic
 spec:
   type: LoadBalancer
-  selector:
-    purpose: "ebs-dynamic-prov"
+  selector: # labels are used as selectors
+    purpose: "ebs-dynamic-demo"
   ports:
-  - protocol: TCP  
-    port: 80
-    targetPort: 80  
-    nodePort: 3007
+  - protocol: TCP
+    port: 80 # service port
+    targetPort: 80
+    nodePort: 30007
