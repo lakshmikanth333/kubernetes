@@ -16,12 +16,11 @@ kind: Pod
 metadata:
   name: ebs-dynamic
   labels:
-    name: web
-    service: pvc
+    purpose: "ebs-dynamic-prov"
 spec:
 # Here the given region us-east-1d node only gets the pv volume since we given it
-  #nodeSelector:
-    #topology.kubernetes.io/zone: us-east-1
+  nodeSelector:
+    topology.kubernetes.io/zone: us-east-1b
   containers:
   - name: nginx
     image: nginx
@@ -43,11 +42,9 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    name: web
-    service: pvc
-
+    purpose: "ebs-dynamic-prov"
   ports:
   - protocol: TCP  
     port: 80
     targetPort: 80  
-    nodePort: 30124
+    nodePort: 3007
