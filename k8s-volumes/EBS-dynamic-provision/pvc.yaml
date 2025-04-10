@@ -17,7 +17,7 @@ metadata:
   name: ebs-dynamic
   labels:
     name: web
-    service: pv
+    service: pvc
 spec:
 # Here the given region us-east-1d node only gets the pv volume since we given it
   nodeSelector:
@@ -44,7 +44,7 @@ spec:
   type: LoadBalancer
   selector:
     name: web
-    service: pv
+    service: pvc
 
   ports:
   - protocol: TCP  
