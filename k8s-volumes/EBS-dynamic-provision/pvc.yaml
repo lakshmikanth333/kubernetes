@@ -21,7 +21,7 @@ metadata:
 spec:
 # Here the given region us-east-1d node only gets the pv volume since we given it
   nodeSelector:
-    topology.kubernetes.io/zone: us-east-1d
+    topology.kubernetes.io/zone: us-east-1
   containers:
   - name: nginx
     image: nginx
