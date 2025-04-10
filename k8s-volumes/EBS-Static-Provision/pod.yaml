@@ -6,7 +6,7 @@ metadata:
     name: web
     service: pv
 spec:
-# here the only given region us-east-1d only gets the pv volume since we given it
+# Here the given region us-east-1d node only gets the pv volume since we given it
   nodeSelector:
     topology.kubernetes.io/zone: us-east-1d
   containers:
@@ -21,7 +21,7 @@ spec:
     persistentVolumeClaim:
       claimName: ebs-static
 
----
+--- 
 
 kind: Service
 apiVersion: v1
