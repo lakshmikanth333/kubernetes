@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PerstistentVolumeClaim
+metadata: 
+  name: efs-dynamic
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: "efs-expense"
+  # volumeName: "efs-static" --> No volume name here
+  resources:
+    requests:
+      storage: 5Gi
