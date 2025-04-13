@@ -7,4 +7,4 @@ spec:
   # one pod can contain multiple containers
   containers:
   - name: nginx
-    image: nginx
+    image: lakshmikanth333/nginx:5.0
