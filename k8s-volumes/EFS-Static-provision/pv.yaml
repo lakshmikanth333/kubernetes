@@ -12,4 +12,4 @@ storageClassName: ""
 persistentVolumeReclaimPolicy: Retain
 csi:
   driver: efs.csi.aws.com
-  volumeHandle: 
+  volumeHandle: fs-0c06fef0055bcf8a0
