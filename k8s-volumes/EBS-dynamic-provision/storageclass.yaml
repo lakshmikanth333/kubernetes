@@ -4,5 +4,5 @@ kind: StorageClass
 metadata:
   name : ebs-sc
 provisioner: ebs.csi.aws.com
-reclaimPolicy: Retain
-volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Retain # Keeps the EBS volume even if PVC is deleted (data safe!).
+volumeBindingMode: WaitForFirstConsumer # Delays volume creation until a Pod is scheduled (ensures AZ matching)
