@@ -1,10 +1,8 @@
-kind: Pod
 apiVersion: v1
+kind: Pod
 metadata:
-  name: nginx
-  namespace: expense
+  name: nginx-server
 spec:
-  # one pod can contain multiple containers
   containers:
   - name: nginx
-    image: lakshmikanth333/nginx:5.0
+    image: nginx:latest
