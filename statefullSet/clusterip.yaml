@@ -4,6 +4,7 @@ metadata:
   name: ci
 spec:
   type: ClusterIP
+  clusterIP: None
   ports:
   - protocol: TCP
     port: 80
