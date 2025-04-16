@@ -35,6 +35,7 @@ metadata:
   name: web-lb
 spec:
   type: LoadBalancer
+# The LoadBalancer will route traffic to pods that match these below selector labels
   selector:
     purpose: autoscale
     env: prod
