@@ -5,7 +5,7 @@ metadata:
 provisioner: efs.csi.aws.com
 parameters:
   provisioningMode: efs-ap #efs-ap = Uses EFS Access Points (recommended for dynamic provisioning).
-  fileSystemId: 
+  fileSystemId: fs-097f6108a898f864b
   directoryPerms: "700"
   basePath: "/expense" #The path on the filesystem under which the access point root directory is created. If the path isn't provided, the access points root directory is created under the root of the filesystem
 
