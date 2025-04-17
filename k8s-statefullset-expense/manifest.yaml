@@ -1,0 +1,82 @@
+
+# apiVersion: storage.k8s.io/v1
+# kind: StorageClass
+# metadata:
+#   name: ebs-sc
+# provisioner: ebs.csi.aws.com
+# reclaimPolicy: Retain # Keeps the EBS volume even if PVC is deleted (data safe!).
+# volumeBindingMode: WaitForFirstConsumer # Delays volume creation until a Pod is scheduled (ensures AZ matching)
+
+
+# eks-csi-driver
+# kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.41"
+---
+
+#Headless service
+
+apiVersion: v1
+kind: Service
+metadata: 
+  name: mysql-headless
+  namespace: expense
+  labels:
+    app: db
+    purpose: sc-storage
+spec:
+  ClusterIP: None
+  selector:
+    app: db
+    purpose: sc-storage
+  ports:
+  - port: 3306 # service port
+    targetPort: 3306
+---
+
+#ClusterIp service 
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: expense
+  labels:
+    app: db
+    purpose: sc-storage
+spec:
+  selector:
+    app: db
+    purpose: sc-storage
+  ports:
+  - protocol: TCP
+    port: 3306
+    targetPort: 3306
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  namespace: expense
+spec:
+  selector:
+    matchLabels:
+      app: db
+      purpose: sc-storage
+  serviceName: "mysql-headless"
+  replicas: 2 # by default is 1
+  minReadySeconds: 10 # by default is 0
+  template:
+    metadata:
+      labels:
+        app: db # has to match .spec.selector.matchLabels
+        purpose: sc-storage
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: nginx
+        image: joindevops/mysql:1.0.0
+        volumeMounts:
+        - name: ebs-statefull
+          mountPath: /var/lib/mysql
+
+
+
+
