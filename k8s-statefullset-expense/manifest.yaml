@@ -1,19 +1,86 @@
 
-# apiVersion: storage.k8s.io/v1
-# kind: StorageClass
+# # apiVersion: storage.k8s.io/v1
+# # kind: StorageClass
+# # metadata:
+# #   name: ebs-sc
+# # provisioner: ebs.csi.aws.com
+# # reclaimPolicy: Retain # Keeps the EBS volume even if PVC is deleted (data safe!).
+# # volumeBindingMode: WaitForFirstConsumer # Delays volume creation until a Pod is scheduled (ensures AZ matching)
+
+
+# # eks-csi-driver
+# # kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.41"
+# ---
+
+# #Headless service
+
+# apiVersion: v1
+# kind: Service
+# metadata: 
+#   name: mysql-headless
+#   namespace: expense
+#   labels:
+#     app: db
+#     purpose: sc-storage
+# spec:
+#   ClusterIP: None
+#   selector:
+#     app: db
+#     purpose: sc-storage
+#   ports:
+#   - port: 3306 # service port
+#     targetPort: 3306
+# ---
+
+# #ClusterIp service 
+# apiVersion: v1
+# kind: Service
 # metadata:
-#   name: ebs-sc
-# provisioner: ebs.csi.aws.com
-# reclaimPolicy: Retain # Keeps the EBS volume even if PVC is deleted (data safe!).
-# volumeBindingMode: WaitForFirstConsumer # Delays volume creation until a Pod is scheduled (ensures AZ matching)
+#   name: mysql
+#   namespace: expense
+#   labels:
+#     app: db
+#     purpose: sc-storage
+# spec:
+#   selector:
+#     app: db
+#     purpose: sc-storage
+#   ports:
+#   - protocol: TCP
+#     port: 3306
+#     targetPort: 3306
+# ---
+# apiVersion: apps/v1
+# kind: StatefulSet
+# metadata:
+#   name: mysql
+#   namespace: expense
+# spec:
+#   serviceName: "mysql-headless"
+#   replicas: 1 # by default is 1
+#   selector:
+#     matchLabels:
+#       app: db
+#       purpose: sc-storage
+#   template:
+#     metadata:
+#       labels:
+#         app: db # has to match .spec.selector.matchLabels
+#         purpose: sc-storage
+#     spec:
+#       terminationGracePeriodSeconds: 10
+#       containers:
+#       - name: nginx
+#         image: joindevops/mysql:1.0.0
+#         volumeMounts:
+#         - name: persistent-storage
+#           mountPath: /var/lib/mysql
+#       volumes: 
+#       - name: persistent-storage
+#         persistentVolumeClaim:
+#           claimName: ebs-statefull
 
-
-# eks-csi-driver
-# kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.41"
----
-
-#Headless service
-
+# Headless Service
 apiVersion: v1
 kind: Service
 metadata: 
@@ -23,16 +90,15 @@ metadata:
     app: db
     purpose: sc-storage
 spec:
-  ClusterIP: None
+  clusterIP: None
   selector:
     app: db
     purpose: sc-storage
   ports:
-  - port: 3306 # service port
+  - port: 3306
     targetPort: 3306
 ---
-
-#ClusterIp service 
+# ClusterIP Service 
 apiVersion: v1
 kind: Service
 metadata:
@@ -50,6 +116,7 @@ spec:
     port: 3306
     targetPort: 3306
 ---
+# StatefulSet with 1 replica using static PVC
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -57,7 +124,7 @@ metadata:
   namespace: expense
 spec:
   serviceName: "mysql-headless"
-  replicas: 1 # by default is 1
+  replicas: 1
   selector:
     matchLabels:
       app: db
@@ -65,17 +132,17 @@ spec:
   template:
     metadata:
       labels:
-        app: db # has to match .spec.selector.matchLabels
+        app: db
         purpose: sc-storage
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-      - name: nginx
+      - name: mysql
         image: joindevops/mysql:1.0.0
         volumeMounts:
         - name: persistent-storage
           mountPath: /var/lib/mysql
-      volumes: 
+      volumes:
       - name: persistent-storage
         persistentVolumeClaim:
           claimName: ebs-statefull
