@@ -74,8 +74,14 @@ spec:
       - name: nginx
         image: joindevops/mysql:1.0.0
         volumeMounts:
-        - name: ebs-statefull
+        - name: persistent-storage
           mountPath: /var/lib/mysql
+      volumes: 
+      - name: persistent-storage
+        persistentVolumeClaim:
+          claimName: ebs-statefull
+
+
 
 
 
