@@ -1,0 +1,9 @@
+deployment:
+  namespace: expense
+  replicas: 2
+  image: joindevops/mysql:1.0.0
+
+service:
+  targetPort: 3306
+
+  

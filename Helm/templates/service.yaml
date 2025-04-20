@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: loadbalancer
+  labels: 
+    name: nginx
+    type: web
+spec:
+  type: Loadbalancer
+  selector:
+    name: nginx
+    type: web
+  ports:
+  - port: {{ .Value}}
+    targetPort: 80
+
+  

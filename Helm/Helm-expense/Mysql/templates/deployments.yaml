@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: {{ .Value.deployment.namespace}}
+  labels:
+    app: mysql
+    type: db
+    project: expense
+spec:
+  replicas: {{ .Value.deployment.replicas}}
+  selector:
+    matchLabels:
+      app: mysql
+      type: db
+      project: expense
+  template:
+    metadata:
+      labels:
+        app: mysql
+        type: db
+        project: expense
+    spec:
+      containers:
+      - name: mysql
+        image: {{ .Value.deployment.image}}  #joindevops/mysql:1.0.0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: expense
+spec:
+  selector:
+    app: mysql
+    type: db
+    project: expense
+  ports:
+  - protocol: TCP
+    port: 3306
+# Service will use targetport number to forward the traffic to pods 
+    targetPort: {{ .Value.service.targetPort}}
+
+        
+
+
+  
+  

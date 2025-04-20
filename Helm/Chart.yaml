@@ -1,0 +1,5 @@
+apiVersion: v2 #v2 for helm
+name: webserver-helm
+description: A sample chart for my webserver
+version: 1.0
+# appVersion: latest
