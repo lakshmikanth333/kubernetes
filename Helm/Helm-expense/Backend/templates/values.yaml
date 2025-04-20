@@ -1,0 +1,6 @@
+deployment:
+  replicas: 1
+  image: joindevops/backend:1.0.0
+
+service:
+  targetPort: 8080
