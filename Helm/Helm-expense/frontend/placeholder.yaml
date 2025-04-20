@@ -1,0 +1,6 @@
+deployment:
+  replicas: 1
+  image: joindevops/frontend:1.2.0
+
+loadbalancer:
+  targetPort: 8080
