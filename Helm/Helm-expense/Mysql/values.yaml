@@ -1,6 +1,6 @@
 deployment:
   namespace: expense
-  replicas: 3
+  replicas: 4
   image: joindevops/mysql:1.0.0
 
 service:
