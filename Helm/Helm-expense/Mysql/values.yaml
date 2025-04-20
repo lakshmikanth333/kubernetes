@@ -6,6 +6,6 @@ deployment:
 service:
   targetPort: 3306
 
-namespace:
-  name: expense
+# namespace:
+#   name: expense
 
