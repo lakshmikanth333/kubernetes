@@ -1,64 +1,64 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata: 
-#   name: app1
-#   labels:
-#     app: my-app
-#     env: prod
-# spec:
-#   replicas: 2
-#   selector:
-#     matchLabels:
-#       app: my-app
-#       env: prod
-#   template:
-#     metadata:
-#       labels:
-#         app: my-app
-#         env: prod
-#     spec:
-#       containers:
-#       - name: web
-#         image: lakshmikanth333/app1:1.0
-#         ports:
-#         - containerPort: 80 # It tells k8s that the container listen on port 80 inside the pod
-# ---
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: app1
+  labels:
+    app: my-app
+    env: prod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-app
+      env: prod
+  template:
+    metadata:
+      labels:
+        app: my-app
+        env: prod
+    spec:
+      containers:
+      - name: web
+        image: lakshmikanth333/app1:1.0
+        ports:
+        - containerPort: 80 # It tells k8s that the container listen on port 80 inside the pod
+---
 
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: app1
-# spec:
-#   selector:
-#     app: my-app
-#     env: prod
-#   ports:
-#   - protocol: TCP
-#     port: 80
-#     targetPort: 80
-# ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app1
+spec:
+  selector:
+    app: my-app
+    env: prod
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+---
 
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: app1
-#   annotations:
-#     alb.ingress.kubernetes.io/scheme: internet-facing
-#     alb.ingress.kubernetes.io/target-type: ip
-#     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
-#     # alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:148761662695:certificate/9594f1e3-6ecf-412a-9317-30f4a8dd40ed
-#     alb.ingress.kubernetes.io/group.name: joindevops
-# spec:
-#   ingressClassName: alb
-#   rules:
-#   - host: "app1.wiki.cloud"
-#     http:
-#       paths:
-#       - pathType: Prefix
-#         path: "/"
-#         backend:
-#           service: 
-#             name: app1
-#             port: 
-#               number: 80
-# ---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app1
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    # alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:148761662695:certificate/9594f1e3-6ecf-412a-9317-30f4a8dd40ed
+    alb.ingress.kubernetes.io/group.name: joindevops
+spec:
+  ingressClassName: alb
+  rules:
+  - host: "app1.wiki3.cloud"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service: 
+            name: app1
+            port: 
+              number: 80
+---
