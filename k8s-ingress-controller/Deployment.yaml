@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: app1
+  name: app3
   labels:
     app: my-app
     env: prod
@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: lakshmikanth333/app1:1.0
+        image: lakshmikanth333/app3:3.0
         ports:
         - containerPort: 80 # It tells k8s that the container listen on port 80 inside the pod
 ---
@@ -27,7 +27,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: app1
+  name: app3
 spec:
   selector:
     app: my-app
@@ -41,7 +41,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: app1
+  name: app3
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
@@ -51,14 +51,14 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-  - host: "app1.wiki3.cloud"
+  - host: "app3.wiki3.cloud"
     http:
       paths:
       - pathType: Prefix
         path: "/"
         backend:
           service: 
-            name: app1
+            name: app3
             port: 
               number: 80
 ---
