@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: lakshmikanth333/app3:3.1
+        image: lakshmikanth333/app3:4.1
         ports:
         - containerPort: 80 # It tells k8s that the container listen on port 80 inside the pod
 ---
