@@ -46,7 +46,7 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-  - host: "app1.daws82s.online"
+  - host: "app1.wiki.cloud"
     http:
       paths:
       - pathType: Prefix
