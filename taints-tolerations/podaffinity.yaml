@@ -2,10 +2,9 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: web
-  label:
+  labels:
     type: web
 spec:
   containers:
   - name: web
     image: nginx
-    
