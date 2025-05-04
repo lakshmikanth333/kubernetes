@@ -5,6 +5,8 @@ metadata:
   labels:
     type: web
 spec:
+  nodeSelector:
+    fuck: sake
   containers:
   - name: web
     image: nginx
