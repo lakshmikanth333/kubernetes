@@ -19,11 +19,14 @@ spec:
   affinity:
     podAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
-      - labelSelector:
-          matchExpressions:
-          - key: fuck
-            operator: In
-            values:
-            - sake
-        topologyKey: topology.kubernetes.io/zone
+        - labelSelector:
+            matchExpressions:
+            - key: fuck
+              operator: In
+              values:
+              - sake
+      topologyKey: topology.kubernetes.io/zone
+  containers:
+    name: web
+    image: nginx
 
