@@ -1,7 +1,7 @@
 # Ingress controller set up
 
 REGION_CODE=us-east-1
-CLUSTER_NAME=expense
+CLUSTER_NAME=expense-12
 ACC_ID=148761662695
 
 1. OIDC provider 
