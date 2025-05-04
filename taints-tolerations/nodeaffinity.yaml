@@ -20,7 +20,7 @@ spec:
             nodeSelectorTerms:
             - matchExpressions:
               - key: name
-                operator: In
+                operator: NotIn
                 values:
                 - ul
               
