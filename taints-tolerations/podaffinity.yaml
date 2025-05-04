@@ -11,19 +11,19 @@ spec:
   - name: web
     image: nginx
 ---
-apiVersion: v1
-kind: Pod
-metadata:
-  name: gun
-spec:
-  affinity:
-    podAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-      - labelSelector:
-          matchExpressions:
-          - key: fuck
-            operator: In
-            values:
-            - sake
-        topologyKey: topology.kubernetes.io/zone
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: gun
+# spec:
+#   affinity:
+#     podAffinity:
+#       requiredDuringSchedulingIgnoredDuringExecution:
+#       - labelSelector:
+#           matchExpressions:
+#           - key: fuck
+#             operator: In
+#             values:
+#             - sake
+#         topologyKey: topology.kubernetes.io/zone
 
