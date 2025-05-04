@@ -86,7 +86,7 @@ spec:
   - host: "justin.wiki3.cloud"
     http:
       paths:
-      - pathType: prefix
+      - pathType: Prefix
         path: "/"
         backend:
           service:
