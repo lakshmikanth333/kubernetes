@@ -14,6 +14,8 @@ spec:
       labels:
         type: web
     spec:
+      nodeSelector:
+        nodetype: ssd
       containers: 
       - name: nginx
         image: lakshmikanth333/app3:4.1
