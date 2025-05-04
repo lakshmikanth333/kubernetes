@@ -5,8 +5,6 @@ metadata:
   labels:
    type: web
 spec:
-  nodeSelector: 
-    nodetype: ssd
   replicas: 2
   selector:
     matchLabels:
@@ -16,7 +14,8 @@ spec:
         labels:
           type: web
       spec:
-        name: nginx
-        image: lakshmikanth333/app3:4.1
-        ports:
-        - containerPort: 80
+        containers: 
+        - name: nginx
+          image: lakshmikanth333/app3:4.1
+          ports:
+          - containerPort: 80
