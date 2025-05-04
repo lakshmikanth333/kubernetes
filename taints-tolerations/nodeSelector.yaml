@@ -5,6 +5,8 @@ metadata:
   labels:
    type: web
 spec:
+  nodeSelector: 
+    nodetype: ssd
   replicas: 2
   selector:
     matchLabels:
