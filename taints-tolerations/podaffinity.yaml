@@ -23,6 +23,7 @@ spec:
           matchExpressions:
           - key: fuck
             operator: In
-            value: sake
-      topologyKey: topology.kubernetes.io/zone
+            values:
+            - sake
+        topologyKey: topology.kubernetes.io/zone
 
