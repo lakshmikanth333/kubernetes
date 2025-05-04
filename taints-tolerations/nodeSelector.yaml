@@ -9,13 +9,13 @@ spec:
   selector:
     matchLabels:
       type: web
-    template:
-      metadata:
-        labels:
-          type: web
-      spec:
-        containers: 
-        - name: nginx
-          image: lakshmikanth333/app3:4.1
-          ports:
-          - containerPort: 80
+  template:
+    metadata:
+      labels:
+        type: web
+    spec:
+      containers: 
+      - name: nginx
+        image: lakshmikanth333/app3:4.1
+        ports:
+        - containerPort: 80
