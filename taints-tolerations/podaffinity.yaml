@@ -6,7 +6,7 @@ metadata:
     type: web
 spec:
   nodeSelector:
-    env: prod
+    fuck: sake
   containers:
   - name: web
     image: nginx
