@@ -1,0 +1,22 @@
+
+# kubectl get configmap aws-auth -n kube-system -o yaml (Run this command from k8s server to see below info except mapUsers)
+apiVersion: v1
+data:
+  mapRoles: |
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::148761662695:role/eksctl-expense-12-nodegroup-Expens-NodeInstanceRole-TIC1Ixb4Z4zj
+      username: system:node:{{EC2PrivateDNSName}}
+  mapUsers: |
+    - groups:
+      - default-trainee
+      userarn: arn:aws:iam::148761662695:user/suresh
+      username: suresh
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2025-05-06T08:33:07Z"
+  name: aws-auth
+  namespace: kube-system
+  resourceVersion: "1301"
+  uid: 256f09d5-ea75-413e-8230-6434debffbf9
