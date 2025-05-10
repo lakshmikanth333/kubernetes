@@ -17,12 +17,12 @@ metadata:
   name: gun
 spec:
   affinity:
-    podAffinity:
+    podAffinity: # Use podAntiAffinity for pod antifinity ( and everything is same)
       requiredDuringSchedulingIgnoredDuringExecution:
         - labelSelector:
             matchExpressions:
             - key: fuck
-              operator: In
+              operator: In 
               values:
               - sake
       topologyKey: topology.kubernetes.io/zone
