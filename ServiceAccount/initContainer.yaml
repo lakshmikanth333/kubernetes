@@ -11,4 +11,4 @@ spec:
   initContainers:
   - name: init-pod
     image: busybox:1.28
-    command: ['sh', '-c', "for i in {1..10}; do sleep 10; if facebook.com; then exit 0; fi; done; exit 1"] 
+    command: ['sh', '-c', "for i in {1..10}; do sleep 10; if nslookup facebook.com; then exit 0; fi; done; exit 1"] 
