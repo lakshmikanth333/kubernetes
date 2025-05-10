@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: prod-daemon
+  labels:
+    app: log-data
+spec:
+  selector:
+    matchLabels:
+      app: log-data
+  template:
+    metadata:
+      labels:
+        app: log-data
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        resources:
+          requests:
+            memory: 100Mi
+            cpu: 100m
+          limits:
+            memory: 200Mi
+            cpu: 300m
+        volumeMounts:
+        - name: logdata
+          mountPath: /host/var/log
+          readOnly: true
+      volumes:
+      - name: logdata
+        hostPath:
+          path: /var/log
+          type: 
+
