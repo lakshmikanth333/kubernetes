@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: prod
-  label:
+  labels:
     name: prod
 spec:
   containers:
